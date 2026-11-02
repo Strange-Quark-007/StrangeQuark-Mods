@@ -1,7 +1,7 @@
 {
     "required": true,
     "minVersion": "0.8",
-    "package": "com.example.moda.mixin",
+    "package": "dev.strangequark.moda.mixin",
     "compatibilityLevel": "JAVA_25",
     "mixins": [],
     "client": [

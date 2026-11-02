@@ -15,7 +15,7 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.example.moda.ModA"
+            "dev.strangequark.moda.ModA"
         ]
     },
     "mixins": [

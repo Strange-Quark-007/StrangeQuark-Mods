@@ -15,7 +15,7 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.example.modb.ModB"
+            "dev.strangequark.modb.ModB"
         ]
     },
     "mixins": [
