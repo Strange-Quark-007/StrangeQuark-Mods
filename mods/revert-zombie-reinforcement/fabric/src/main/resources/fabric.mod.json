@@ -8,7 +8,8 @@
         "${mod_author}"
     ],
     "contact": {
-        "homepage": "https://fabricmc.net/"
+        "homepage": "https://github.com/Strange-Quark-007/StrangeQuark-Mods",
+        "sources": "https://github.com/Strange-Quark-007/StrangeQuark-Mods"
     },
     "license": "${license}",
     "icon": "${mod_id}.png",
