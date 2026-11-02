@@ -241,13 +241,13 @@ if (sub.name == 'fabric') {
                 client()
                 setConfigName("${sub.ext.mod_name} Fabric Client")
                 ideConfigGenerated(true)
-                runDir("runs/client")
+                runDir(rootProject.file("runs/fabric/client").absolutePath)
             }
             server {
                 server()
                 setConfigName("${sub.ext.mod_name} Fabric Server")
                 ideConfigGenerated(true)
-                runDir("runs/server")
+                runDir(rootProject.file("runs/fabric/server").absolutePath)
             }
         }
     }
@@ -274,11 +274,11 @@ if (sub.name == 'neoforge') {
             }
             client {
                 client()
-                gameDirectory = sub.mkdir(sub.file('runs/client'))
+                gameDirectory = rootProject.mkdir(rootProject.file('runs/neoforge/client'))
             }
             server {
                 server()
-                gameDirectory = sub.mkdir(sub.file('runs/server'))
+                gameDirectory = rootProject.mkdir(rootProject.file('runs/neoforge/server'))
             }
             data {
                 clientData()
