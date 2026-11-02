@@ -35,7 +35,7 @@ plugins {
 rootProject.name = 'StrangeQuark-Mods'
 
 // Active mods in the monorepo
-def enabledMods = ['mod-a', 'mod-b']
+def enabledMods = ['revert-zombie-reinforcement', 'mod-b']
 
 // Register each mod and its platform subprojects
 def loaders = ['common', 'fabric', 'neoforge']
