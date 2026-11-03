@@ -33,10 +33,9 @@ public class CommonClass {
         boolean disableRain = server.getGameRules().get(DISABLE_ELYTRA_IN_RAIN);
         boolean disableWater = server.getGameRules().get(DISABLE_ELYTRA_IN_WATER);
         boolean disableLava = server.getGameRules().get(DISABLE_ELYTRA_IN_LAVA);
-        boolean isOverworldRaining = server.overworld().isRaining();
 
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-            if (disableRain && isOverworldRaining && server.overworld().canSeeSky(player.blockPosition())) {
+            if (disableRain && player.level().isRainingAt(player.blockPosition())) {
                 player.getCooldowns().addCooldown(new ItemStack(Items.ELYTRA), cooldownTicks);
             }
             if (disableWater && player.isInWater()) {
@@ -53,7 +52,7 @@ public class CommonClass {
             return false;
         }
         if (stack.getItem() == Items.FIREWORK_ROCKET) {
-            return world.getGameRules().get(DISABLE_ROCKETS_IN_RAIN) && world.isRaining() && world.canSeeSky(player.blockPosition());
+            return world.getGameRules().get(DISABLE_ROCKETS_IN_RAIN) && world.isRainingAt(player.blockPosition());
         }
         return false;
     }
