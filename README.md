@@ -10,6 +10,12 @@ A collection of lightweight, vanilla-friendly Minecraft mods for Fabric and NeoF
 
   [![Mod Downloads](https://img.shields.io/modrinth/dt/4gvjX4E3?logo=modrinth&style=for-the-badge&labelColor=002244&color=164A7C)](https://modrinth.com/mod/analog-redstone-lamp) &nbsp;&nbsp;&nbsp;&nbsp; [![Mod Downloads](https://img.shields.io/curseforge/dt/1447280?logo=curseforge&style=for-the-badge&labelColor=002244&color=164A7C)](https://www.curseforge.com/minecraft/mc-mods/analog-redstone-lamp)
 
+[**Drenched Wings**](mods/drenched-wings)
+
+- Blocks elytra use in liquids, applies environmental penalties, and enforces cooldowns. Fully configurable through server gamerules.
+
+  [![Mod Downloads](https://img.shields.io/modrinth/dt/IBRsFs5j?logo=modrinth&style=for-the-badge&labelColor=002244&color=164A7C)](https://modrinth.com/mod/drenched-wings) &nbsp;&nbsp;&nbsp;&nbsp; [![Mod Downloads](https://img.shields.io/curseforge/dt/1447270?logo=curseforge&style=for-the-badge&labelColor=002244&color=164A7C)](https://www.curseforge.com/minecraft/mc-mods/drenched-wings)
+
 [**Revert Zombie Reinforcement**](mods/revert-zombie-reinforcement)
 
 - Restores pre-1.21.2 behaviour: zombie reinforcements always spawn as zombies, not subtypes like drowned or husks.

@@ -1,0 +1,69 @@
+package dev.strangequark.drenchedwings.mixin;
+
+import dev.strangequark.drenchedwings.CommonClass;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.PotionTags;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemCooldowns;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.phys.AABB;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+@Mixin(net.minecraft.world.entity.projectile.throwableitemprojectile.AbstractThrownPotion.class)
+public class ThrownSplashPotionMixin {
+    @Inject(method = "affectEntitiesAround", at = @At("HEAD"))
+    private void onPotionHit(ServerLevel serverLevel, PotionContents potionContents, CallbackInfo ci) {
+        if (!serverLevel.getGameRules().get(CommonClass.DO_ELYTRA_NERF) || !serverLevel.getGameRules().get(CommonClass.APPLY_ELYTRA_COOLDOWN_FROM_SPLASH_WATER)) {
+            return;
+        }
+
+        if (!potionContents.is(PotionTags.EXTINGUISHES_ENTITIES) && !potionContents.is(PotionTags.HURTS_WATER_SENSITIVE_ENTITIES)) {
+            return;
+        }
+
+        Entity self = (Entity) (Object) this;
+        AABB aABB = self.getBoundingBox().inflate(4.0, 2.0, 4.0);
+        ItemStack elytraStack = new ItemStack(Items.ELYTRA);
+
+        int cooldownSeconds = Math.clamp(serverLevel.getGameRules().get(CommonClass.ELYTRA_COOLDOWN_SECONDS), 0, 30);
+
+        for (LivingEntity livingEntity : serverLevel.getEntitiesOfClass(LivingEntity.class, aABB)) {
+            if (!(livingEntity instanceof ServerPlayer player)) {
+                continue;
+            }
+
+            double d = self.distanceToSqr(livingEntity);
+            if (d < 16.0) {
+                double e = 1.0 - Math.sqrt(d) / 4.0;
+                int scaledTicks = (int) ((cooldownSeconds * e + 0.5) * 20);
+
+                ItemCooldowns cd = player.getCooldowns();
+                ItemCooldownsAccessor cdAcc = (ItemCooldownsAccessor) cd;
+
+                Identifier resourceIdentifier = cd.getCooldownGroup(elytraStack);
+                Object instObj = cdAcc.getRawCooldowns().get(resourceIdentifier);
+
+                int now = cdAcc.getTickCount();
+
+                if (instObj == null) {
+                    cd.addCooldown(elytraStack, scaledTicks);
+                } else {
+                    int endTime = ((CooldownInstanceAccessor) instObj).getEndTime();
+                    int remaining = endTime - now;
+
+                    if (remaining < scaledTicks) {
+                        cd.addCooldown(elytraStack, scaledTicks);
+                    }
+                }
+            }
+        }
+    }
+}
