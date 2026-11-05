@@ -16,6 +16,12 @@ A collection of lightweight, vanilla-friendly Minecraft mods for Fabric and NeoF
 
   [![Mod Downloads](https://img.shields.io/modrinth/dt/IBRsFs5j?logo=modrinth&style=for-the-badge&labelColor=002244&color=164A7C)](https://modrinth.com/mod/drenched-wings) &nbsp;&nbsp;&nbsp;&nbsp; [![Mod Downloads](https://img.shields.io/curseforge/dt/1447270?logo=curseforge&style=for-the-badge&labelColor=002244&color=164A7C)](https://www.curseforge.com/minecraft/mc-mods/drenched-wings)
 
+[**Mob Census**](mods/mob-census)
+
+- Displays real-time counts of nearby hostile and passive mobs on your HUD.
+
+  [![Mod Downloads](https://img.shields.io/modrinth/dt/ifAaCnHp?logo=modrinth&style=for-the-badge&labelColor=002244&color=164A7C)](https://modrinth.com/mod/mob-census) &nbsp;&nbsp;&nbsp;&nbsp; [![Mod Downloads](https://img.shields.io/curseforge/dt/1783897?logo=curseforge&style=for-the-badge&labelColor=002244&color=164A7C)](https://www.curseforge.com/minecraft/mc-mods/mob-census)
+
 [**Revert Zombie Reinforcement**](mods/revert-zombie-reinforcement)
 
 - Restores pre-1.21.2 behaviour: zombie reinforcements always spawn as zombies, not subtypes like drowned or husks.

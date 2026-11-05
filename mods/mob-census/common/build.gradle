@@ -1,0 +1,9 @@
+repositories {
+    maven { url = "https://maven.shedaniel.me/" }
+}
+
+dependencies {
+    compileOnly("me.shedaniel.cloth:cloth-config-neoforge:26.2.155") {
+        transitive = false
+    }
+}

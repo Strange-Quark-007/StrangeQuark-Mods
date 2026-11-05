@@ -1,0 +1,11 @@
+repositories {
+    maven { url = "https://maven.shedaniel.me/" }
+    maven { url = "https://maven.terraformersmc.com/releases" }
+}
+
+dependencies {
+    implementation("me.shedaniel.cloth:cloth-config-fabric:26.2.155") {
+        exclude group: "net.fabricmc.fabric-api"
+    }
+    compileOnly "com.terraformersmc:modmenu:20.0.3"
+}
