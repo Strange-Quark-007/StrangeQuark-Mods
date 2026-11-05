@@ -3,7 +3,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("me.shedaniel.cloth:cloth-config-neoforge:26.1.154") {
+    compileOnly("me.shedaniel.cloth:cloth-config-neoforge:${cloth_config_version}") {
         transitive = false
     }
 }
