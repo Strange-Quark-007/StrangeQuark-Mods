@@ -11,7 +11,6 @@ public class KeybindHandler {
     public static void handleInput() {
         Minecraft client = Minecraft.getInstance();
         if (client.gui.screen() != null) {
-            // Do not toggle while in chat, inventory, or menus
             return;
         }
 
@@ -34,4 +33,3 @@ public class KeybindHandler {
         }
     }
 }
-

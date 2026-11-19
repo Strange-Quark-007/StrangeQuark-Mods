@@ -26,26 +26,21 @@ public class ModConfig {
         return ModifierKeyCode.of(InputConstants.Type.KEYSYM.getOrCreate(GLFW.GLFW_KEY_N), Modifier.of(true, false, false));
     }
 
-    // General
     public int detectionRadius = 64;
     public int scanIntervalTicks = 5;
     public boolean showNamedMobs = true;
 
-    // Appearance
     public int bgOpacity = 50;
-    public int hudScale = 85; // 85% compact scale
+    public int hudScale = 85;
     public int xOffset = 4;
-    public int yOffset = 0; // 0 = centered vertically on right edge
+    public int yOffset = 0;
 
-    // Active state (toggled via hotkeys)
     public boolean hostileEnabled = true;
     public boolean passiveEnabled = true;
 
-    // Keybindings stored for JSON serialization
     public KeyConfig hostileKeyBinding = KeyConfig.from(defaultHostileKey());
     public KeyConfig passiveKeyBinding = KeyConfig.from(defaultPassiveKey());
 
-    // Runtime ModifierKeyCode objects
     public transient ModifierKeyCode hostileKey = defaultHostileKey();
     public transient ModifierKeyCode passiveKey = defaultPassiveKey();
 
