@@ -17,14 +17,12 @@ public class ClothConfigScreenFactory {
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-        // General Category
         ConfigCategory general = builder.getOrCreateCategory(Component.translatable("config.mobcensus.category.general"));
 
-        // Detection Radius in clean steps of 4 blocks (4 to 128)
         general.addEntry(entryBuilder.startIntSlider(
                         Component.translatable("config.mobcensus.detection_radius"),
                         Math.clamp(ModConfig.INSTANCE.detectionRadius / 4, 1, 32), 1, 32)
-                .setDefaultValue(16) // 16 * 4 = 64 blocks
+                .setDefaultValue(16)
                 .setTextGetter(val -> Component.literal((val * 4) + " blocks"))
                 .setTooltip(Component.translatable("config.mobcensus.detection_radius.tooltip"))
                 .setSaveConsumer(val -> ModConfig.INSTANCE.detectionRadius = val * 4)
@@ -47,24 +45,21 @@ public class ClothConfigScreenFactory {
                 .setSaveConsumer(val -> ModConfig.INSTANCE.showNamedMobs = val)
                 .build());
 
-        // Appearance Category
         ConfigCategory appearance = builder.getOrCreateCategory(Component.translatable("config.mobcensus.category.appearance"));
 
-        // Background Opacity in clean steps of 5% (0% to 100%)
         appearance.addEntry(entryBuilder.startIntSlider(
                         Component.translatable("config.mobcensus.bg_opacity"),
                         Math.clamp(ModConfig.INSTANCE.bgOpacity / 5, 0, 20), 0, 20)
-                .setDefaultValue(10) // 10 * 5 = 50%
+                .setDefaultValue(10)
                 .setTextGetter(val -> Component.literal((val * 5) + "%"))
                 .setTooltip(Component.translatable("config.mobcensus.bg_opacity.tooltip"))
                 .setSaveConsumer(val -> ModConfig.INSTANCE.bgOpacity = val * 5)
                 .build());
 
-        // HUD Scale in clean steps of 5% (50% to 150%)
         appearance.addEntry(entryBuilder.startIntSlider(
                         Component.translatable("config.mobcensus.hud_scale"),
                         Math.clamp(ModConfig.INSTANCE.hudScale / 5, 10, 30), 10, 30)
-                .setDefaultValue(17) // 17 * 5 = 85%
+                .setDefaultValue(17)
                 .setTextGetter(val -> Component.literal((val * 5) + "%"))
                 .setTooltip(Component.translatable("config.mobcensus.hud_scale.tooltip"))
                 .setSaveConsumer(val -> ModConfig.INSTANCE.hudScale = val * 5)
@@ -90,7 +85,6 @@ public class ClothConfigScreenFactory {
                 .setSaveConsumer(val -> ModConfig.INSTANCE.yOffset = val)
                 .build());
 
-        // Keybinds Category
         ConfigCategory keybinds = builder.getOrCreateCategory(Component.translatable("config.mobcensus.category.keybinds"));
 
         keybinds.addEntry(entryBuilder.startModifierKeyCodeField(

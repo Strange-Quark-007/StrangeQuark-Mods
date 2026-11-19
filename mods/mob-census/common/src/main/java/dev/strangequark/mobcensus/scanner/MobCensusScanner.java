@@ -80,7 +80,7 @@ public class MobCensusScanner {
             boolean isNamed = mob.hasCustomName() && customName != null;
 
             if (!ModConfig.INSTANCE.showNamedMobs && isNamed) {
-                continue; // Exclude name-tagged mobs if user turned off the setting
+                continue;
             }
 
             MobCategory category = MobClassifier.classify(mob);
