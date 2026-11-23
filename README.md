@@ -4,6 +4,12 @@ A collection of lightweight, vanilla-friendly Minecraft mods for Fabric and NeoF
 
 ## Minecraft Mods
 
+[**Allay Item Reservation**](mods/allay-item-reservation)
+
+- Prevents multiple Allays from competing for the same dropped item simultaneously.
+
+  [![Mod Downloads](https://img.shields.io/modrinth/dt/lBYYOpms?logo=modrinth&style=for-the-badge&labelColor=002244&color=164A7C)](https://modrinth.com/mod/allay-item-reservation) &nbsp;&nbsp;&nbsp;&nbsp; [![Mod Downloads](https://img.shields.io/curseforge/dt/1826287?logo=curseforge&style=for-the-badge&labelColor=002244&color=164A7C)](https://www.curseforge.com/minecraft/mc-mods/allay-item-reservation)
+
 [**Analog Redstone Lamp**](mods/analog-redstone-lamp)
 
 - Makes redstone lamps emit light levels matching the input signal strength.

@@ -36,6 +36,7 @@ rootProject.name = 'StrangeQuark-Mods'
 
 // Active mods in the monorepo
 def enabledMods = [
+        'allay-item-reservation',
         'analog-redstone-lamp',
         'drenched-wings',
         'mob-census',
