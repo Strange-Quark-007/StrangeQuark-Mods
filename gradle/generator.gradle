@@ -141,7 +141,7 @@ tasks.register('createMod') {
         if (!rawName || rawName.isEmpty()) {
             throw new GradleException(
                     "Mod name is required.\n" +
-                            "Usage: ./gradlew createMod -Pname=<mod-name> [-Pgroup=<custom.group>]\n" +
+                            "Usage: ./gradlew createMod -Pname=<mod-name> [-Pgroup=<custom.group>] [-Pdatagen=true]\n" +
                             "Example: ./gradlew createMod -Pname=my-new-mod -Pgroup=dev.strangequark.mymod"
             )
         }
@@ -188,6 +188,18 @@ tasks.register('createMod') {
         def modVer = (cliProps['mod_version'] ?: cliProps['version'] ?: rootProject.findProperty('version') ?: '1.0.0').toString().replaceAll(/^["']+|["']+$/, '').trim()
         def desc = (cliProps['description'] ?: "${modDisplayName} mod in the monorepo.").toString().replaceAll(/^["']+|["']+$/, '').trim()
 
+        def rawDatagen = cliProps['datagen']?.replaceAll(/^["']+|["']+$/, '')?.trim()?.toLowerCase()
+        boolean enableDatagen
+        if (!rawDatagen) {
+            enableDatagen = false
+        } else if (rawDatagen in ['true', 'on', 'yes', '1']) {
+            enableDatagen = true
+        } else if (rawDatagen in ['false', 'off', 'no', '0']) {
+            enableDatagen = false
+        } else {
+            throw new GradleException("Invalid -Pdatagen value '${cliProps['datagen']}'. Use true/false or on/off.")
+        }
+
         // Baseline template tokens
         def templateGroup = "com.example.template"
         def templateGroupPath = templateGroup.replace('.', '/')
@@ -205,6 +217,7 @@ tasks.register('createMod') {
         logger.lifecycle("   Version:    ${modVer}")
         logger.lifecycle("   Author:     ${author}")
         logger.lifecycle("   License:    ${license}")
+        logger.lifecycle("   Datagen:    ${enableDatagen ? 'enabled' : 'disabled'}")
         logger.lifecycle("==================================================")
 
         // Extract and transform blueprint files
@@ -214,6 +227,9 @@ tasks.register('createMod') {
                 if (entry.isDirectory()) return
 
                 def entryName = entry.name.replace('\\', '/')
+                if (!enableDatagen && entryName.endsWith('/ModDataGenerator.java')) {
+                    return
+                }
                 def destName = entryName
 
                 // 1. Rename Java package path
@@ -253,7 +269,17 @@ tasks.register('createMod') {
                     content = content.replace("mod_author=Strange Quark", "mod_author=${author}")
                     content = content.replace("description=A modular mod component in the monorepo.", "description=${desc}")
                     content = content.replace("license=MIT", "license=${license}")
+                    if (!enableDatagen) {
+                        content = content.replace("datagen=true", "datagen=false")
+                    }
                 } else {
+                    if (!enableDatagen) {
+                        if (entryName == 'fabric/src/main/resources/fabric.mod.json') {
+                            content = content.replaceAll(/,\r?\n[ \t]*"fabric-datagen":\s*\[\s*[^\]]*\]/, '')
+                        } else if (entryName == "neoforge/src/main/java/${templateGroupPath}/${templateMainClass}.java") {
+                            content = content.replaceAll(/\r?\n[ \t]*eventBus\.addListener\(ModDataGenerator::gatherData\);/, '')
+                        }
+                    }
                     // Package & import replacements
                     content = content.replace(templateGroup, targetGroup)
                     // Main class replacements (class name, constructor, entrypoints)
